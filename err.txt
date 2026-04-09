@@ -1,0 +1,91 @@
+﻿[36mvite v6.4.2 [32mbuilding for production...[36m[39m
+transforming...
+[32mÔ£ô[39m 15 modules transformed.
+node.exe : [31mÔ£ù[39m 
+Build failed in 284ms
+No linha:1 caractere:1
++ & "C:\Program 
+Files\nodejs/node.exe" 
+"C:\Program 
+Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~
+    + CategoryInfo         
+     : NotSpecified: ([3  
+  1mÔ£ù[39m Build faile   
+ d in 284ms:String) [],    
+ RemoteException
+    + FullyQualifiedErrorI 
+   d : NativeCommandError
+ 
+[31merror during build:
+[31m[vite]: Rollup failed 
+to resolve import 
+"@radix-ui/react-tooltip" 
+from "C:/Users/Danilo Moura
+/Downloads/ScorePontoCom-2/
+src/components/ui/tooltip.t
+sx".
+This is most likely 
+unintended because it can 
+break your application at 
+runtime.
+If you do want to 
+externalize this module 
+explicitly add it to
+`build.rollupOptions.extern
+al`[31m
+    at viteLog (file:///C:/
+Users/Danilo%20Moura/Downlo
+ads/ScorePontoCom-2/node_mo
+dules/vite/dist/node/chunks
+/dep-Dq2t6Dq0.js:46399:15)
+    at file:///C:/Users/Dan
+ilo%20Moura/Downloads/Score
+PontoCom-2/node_modules/vit
+e/dist/node/chunks/dep-Dq2t
+6Dq0.js:46457:18
+    at onwarn (file:///C:/U
+sers/Danilo%20Moura/Downloa
+ds/ScorePontoCom-2/node_mod
+ules/@vitejs/plugin-react/d
+ist/index.js:90:7)
+    at file:///C:/Users/Dan
+ilo%20Moura/Downloads/Score
+PontoCom-2/node_modules/vit
+e/dist/node/chunks/dep-Dq2t
+6Dq0.js:46455:7
+    at onRollupLog (file://
+/C:/Users/Danilo%20Moura/Do
+wnloads/ScorePontoCom-2/nod
+e_modules/vite/dist/node/ch
+unks/dep-Dq2t6Dq0.js:46447:
+5)
+    at onLog (file:///C:/Us
+ers/Danilo%20Moura/Download
+s/ScorePontoCom-2/node_modu
+les/vite/dist/node/chunks/d
+ep-Dq2t6Dq0.js:46097:7)
+    at file:///C:/Users/Dan
+ilo%20Moura/Downloads/Score
+PontoCom-2/node_modules/rol
+lup/dist/es/shared/node-ent
+ry.js:21369:32
+    at Object.logger [as 
+onLog] (file:///C:/Users/Da
+nilo%20Moura/Downloads/Scor
+ePontoCom-2/node_modules/ro
+llup/dist/es/shared/node-en
+try.js:23364:9)
+    at ModuleLoader.handleI
+nvalidResolvedId (file:///C
+:/Users/Danilo%20Moura/Down
+loads/ScorePontoCom-2/node_
+modules/rollup/dist/es/shar
+ed/node-entry.js:22108:26)
+    at file:///C:/Users/Dan
+ilo%20Moura/Downloads/Score
+PontoCom-2/node_modules/rol
+lup/dist/es/shared/node-ent
+ry.js:22066:26[39m

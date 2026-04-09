@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "ScorePontoCom - Landing Page"
+version = "1.0.0"
+id = "artifacts/scorepontocom"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 25506
+
+[services.development]
+run = "pnpm --filter @workspace/scorepontocom run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/scorepontocom", "run", "build" ]
+publicDir = "artifacts/scorepontocom/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "25506"
+BASE_PATH = "/"

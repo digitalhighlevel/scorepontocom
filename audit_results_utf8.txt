@@ -1,0 +1,30 @@
+﻿
+[UX AUDIT] 62 files checked
+--------------------------------------------------
+[!] ISSUES (8):
+  - [Cognitive Load] index.css: Form inputs without labels. Use <label> for accessibility and clarity.
+  - [Cognitive Load] button.tsx: Form inputs without labels. Use <label> for accessibility and clarity.
+  - [Cognitive Load] calendar.tsx: Form inputs without labels. Use <label> for accessibility and clarity.
+  - [Cognitive Load] card.tsx: Form inputs without labels. Use <label> for accessibility and clarity.
+  - [Cognitive Load] hover-card.tsx: Form inputs without labels. Use <label> for accessibility and clarity.
+  - [Cognitive Load] input-group.tsx: Form inputs without labels. Use <label> for accessibility and clarity.
+  - [Cognitive Load] landing-page.tsx: Form inputs without labels. Use <label> for accessibility and clarity.
+  - [Cognitive Load] not-found.tsx: Form inputs without labels. Use <label> for accessibility and clarity.
+[*] WARNINGS (176):
+  - [Serial Position] index.html: Last nav item may not be important. Place key actions at start/end.
+  - [Cognitive Load] index.css: High visual noise detected. Many colors and borders increase cognitive load.
+  - [Typography] index.css: Adjacent font weights (800/700). Skip at least 2 levels for contrast.
+  - [Typography] index.css: Fixed font sizes without clamp(). Consider fluid typography: clamp(MIN, PREFERRED, MAX)
+  - [Performance] index.css: Animating expensive properties (bottom, padding, height, width). Use transform/opacity where possible.
+  - [Accessibility] index.css: Animations found without prefers-reduced-motion check
+  - [Visual] index.css: Many gradients detected (15). Ensure this serves purpose, not decoration.
+  - [Visual] index.css: Many border declarations (15). Simplify for cleaner look.
+  - [Visual] index.css: Many visual effects (14). Ensure effects serve purpose, not decoration.
+  - [Color] index.css: 12 distinct colors. Consider 60-30-10 rule: dominant (60%), secondary (30%), accent (10%).
+  - [Motion] index.css: Many animations (26). Ensure majority serve functional purpose (feedback, guidance), not decoration.
+  - [Fitts' Law] accordion.tsx: Small targets (< 44px)
+  - [Typography] accordion.tsx: Fixed font sizes without clamp(). Consider fluid typography: clamp(MIN, PREFERRED, MAX)
+  - [Von Restorff] alert-dialog.tsx: No primary CTA
+  - [Trust] alert-dialog.tsx: Footer lacks authority signals. Add certifications, awards, or media mentions.
+[+] PASSED CHECKS: 10
+STATUS: FAIL
