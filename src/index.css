@@ -148,6 +148,13 @@
   opacity: 0.7;
 }
 
+@media (max-width: 768px) {
+  .bg-mesh::after {
+    animation: none; /* Disable expensive rotation on mobile */
+    opacity: 0.4;
+  }
+}
+
 @keyframes mesh-rotate {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
@@ -247,6 +254,12 @@
   border-radius: inherit;
 }
 
+@media (max-width: 768px) {
+  .noise::after {
+    opacity: 0.02; /* Nearly invisible noise on mobile to save GPU */
+  }
+}
+
 /* ===================== GLASS ===================== */
 .glass {
   background: var(--bg-card);
@@ -260,6 +273,18 @@
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
   border-bottom: 1px solid var(--border-subtle);
+}
+
+@media (max-width: 768px) {
+  .glass {
+    backdrop-filter: blur(8px); /* Reduce expensive blur on mobile */
+    -webkit-backdrop-filter: blur(8px);
+    background: rgba(6, 7, 26, 0.95); /* More opaque fallback */
+  }
+  .glass-nav {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
 }
 
 /* ===================== ANIMATIONS ===================== */
