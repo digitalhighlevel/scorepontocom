@@ -352,9 +352,9 @@ function BentoCard({ icon, title, desc, className = "", num, total, badge }: Ben
       whileHover={{ y: -4, scale: 1.01 }}
       className={`card-glass flex flex-col justify-between h-full`} 
       style={{ 
-        minHeight: windowWidth < 768 ? "240px" : "340px", 
-        padding: windowWidth < 768 ? "1.25rem" : "2rem",
-        borderRadius: windowWidth < 768 ? "1.25rem" : "2rem",
+        minHeight: "340px", 
+        padding: "2rem",
+        borderRadius: "2rem",
         transition: "all 0.3s ease", 
         cursor: "default",
         background: "var(--bg-card)",
@@ -367,9 +367,9 @@ function BentoCard({ icon, title, desc, className = "", num, total, badge }: Ben
         <div className="flex justify-between items-start w-full">
           {/* Top Left Icon Square */}
           <div style={{ 
-            width: windowWidth < 768 ? "2.75rem" : "3.5rem", 
-            height: windowWidth < 768 ? "2.75rem" : "3.5rem", 
-            borderRadius: windowWidth < 768 ? "0.75rem" : "1rem", 
+            width: "3.5rem", 
+            height: "3.5rem", 
+            borderRadius: "1rem", 
             background: "rgba(42, 196, 109, 0.05)", 
             display: "flex", 
             alignItems: "center", 
@@ -377,7 +377,7 @@ function BentoCard({ icon, title, desc, className = "", num, total, badge }: Ben
             color: "var(--brand-green)",
             border: "1px solid rgba(42, 196, 109, 0.15)"
           }}>
-            {windowWidth < 768 ? React.cloneElement(icon as any, { size: 20 }) : icon}
+            {icon}
           </div>
           
           {/* Top Right Step Index */}
@@ -392,13 +392,13 @@ function BentoCard({ icon, title, desc, className = "", num, total, badge }: Ben
             <span style={{ fontFamily: "Inter", fontSize: "0.55rem", fontWeight: 800, color: "var(--brand-green)", letterSpacing: "0.1em", textTransform: "uppercase" }}>{badge}</span>
           </div>
 
-          <h3 style={{ fontFamily: "Sora", fontWeight: 700, fontSize: windowWidth < 768 ? "1.1rem" : "1.25rem", color: "white", marginBottom: "0.5rem", letterSpacing: "-0.02em" }}>{title}</h3>
-          <p style={{ fontFamily: "Inter", fontSize: windowWidth < 768 ? "0.75rem" : "0.875rem", color: "var(--text-secondary)", lineHeight: 1.5 }}>{desc}</p>
+          <h3 style={{ fontFamily: "Sora", fontWeight: 700, fontSize: "1.25rem", color: "white", marginBottom: "0.75rem", letterSpacing: "-0.02em" }}>{title}</h3>
+          <p style={{ fontFamily: "Inter", fontSize: "0.875rem", color: "var(--text-secondary)", lineHeight: 1.6 }}>{desc}</p>
         </div>
       </div>
 
       {/* Segmented Progress Bar at the bottom */}
-      <div style={{ display: "flex", gap: "4px", width: "100%", marginTop: windowWidth < 768 ? "1.5rem" : "2.5rem" }}>
+      <div style={{ display: "flex", gap: "4px", width: "100%", marginTop: "2.5rem" }}>
         {[...Array(total)].map((_, i) => (
           <div 
             key={i} 
@@ -1044,10 +1044,24 @@ export default function LandingPage() {
         <Reveal delay={1} className="w-full mt-28">
           <div style={{ position: "relative", padding: "2.5rem 0", borderTop: "1px solid rgba(255,255,255,0.05)", borderBottom: "1px solid rgba(255,255,255,0.05)", background: "rgba(255,255,255,0.01)" }}>
             <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 1.5rem", display: "flex", flexDirection: "column", alignItems: "center", gap: "2.5rem" }}>
-              <p style={{ fontFamily: "Inter", fontSize: "0.7rem", fontWeight: 700, color: "var(--brand-green)", textTransform: "uppercase", letterSpacing: "0.25em", opacity: 0.8, display: "flex", alignItems: "center", gap: "1rem" }}>
-                <span style={{ width: "2rem", height: "1px", background: "var(--brand-green)", opacity: 0.3 }} />
+              <p style={{ 
+                fontFamily: "Inter", 
+                fontSize: windowWidth < 768 ? "0.6rem" : "0.7rem", 
+                fontWeight: 700, 
+                color: "var(--brand-green)", 
+                textTransform: "uppercase", 
+                letterSpacing: windowWidth < 768 ? "0.1em" : "0.25em", 
+                opacity: 0.8, 
+                display: "flex", 
+                alignItems: "center", 
+                justifyContent: "center",
+                gap: windowWidth < 768 ? "0.5rem" : "1rem",
+                width: "100%",
+                whiteSpace: "nowrap"
+              }}>
+                <span style={{ width: windowWidth < 768 ? "1rem" : "2rem", height: "1px", background: "var(--brand-green)", opacity: 0.3 }} />
                 Especialistas em Protocolos de Auditoria
-                <span style={{ width: "2rem", height: "1px", background: "var(--brand-green)", opacity: 0.3 }} />
+                <span style={{ width: windowWidth < 768 ? "1rem" : "2rem", height: "1px", background: "var(--brand-green)", opacity: 0.3 }} />
               </p>
               <div style={{ 
                 display: "flex", 
@@ -1080,7 +1094,7 @@ export default function LandingPage() {
             borderRadius: "2rem", 
             padding: windowWidth < 768 ? "2.5rem 1.5rem" : "4rem 3rem",
             display: "grid", 
-            gridTemplateColumns: windowWidth < 640 ? "repeat(2, 1fr)" : windowWidth < 1024 ? "repeat(2, 1fr)" : "repeat(4, 1fr)", 
+            gridTemplateColumns: windowWidth < 1024 ? "repeat(1, 1fr)" : "repeat(4, 1fr)", 
             gap: windowWidth < 768 ? "2.5rem 1rem" : "3rem",
             position: "relative",
             overflow: "hidden"
@@ -1264,8 +1278,8 @@ export default function LandingPage() {
 
           <div style={{ 
             display: "grid", 
-            gap: windowWidth < 768 ? "0.75rem" : "1.5rem", 
-            gridTemplateColumns: windowWidth < 768 ? "repeat(2, 1fr)" : "repeat(auto-fit, minmax(280px, 1fr))"
+            gap: "1.5rem", 
+            gridTemplateColumns: windowWidth < 768 ? "1fr" : "repeat(auto-fit, minmax(280px, 1fr))"
           }}>
             {services.map((service, index) => (
               <Reveal key={index} delay={index * 0.1}>
