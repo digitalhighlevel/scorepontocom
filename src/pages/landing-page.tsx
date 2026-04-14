@@ -770,7 +770,10 @@ export default function LandingPage() {
             }}
             className="text-white mx-auto"
           >
-            Limpe seu Nome e Prepare seu Perfil para <span className="grad-text">Voltar a Ter Crédito</span> no Mercado.
+            Limpe seu Nome e<br className="hidden md:block" />
+            Prepare seu Perfil para<br className="hidden md:block" />
+            <span className="grad-text">Voltar a Ter Crédito</span><br className="hidden md:block" />
+            no Mercado.
           </motion.h1>
 
           <motion.p
