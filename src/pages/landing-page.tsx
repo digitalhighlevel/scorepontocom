@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
-import { 
-  ShieldCheck, 
-  TrendingUp, 
-  Building2, 
+import {
+  ShieldCheck,
+  TrendingUp,
+  Building2,
   MessageCircle,
   Search,
   History as HistoryIcon,
@@ -61,7 +61,7 @@ function Speedometer({ size = 220, dashboardVisible = false }: { size?: number, 
   // The SVG height is size*0.82 so we show the arc + ticks but cut below center.
   const cx = size / 2;
   const cy = size * 0.60;
-  const r  = size * 0.40;
+  const r = size * 0.40;
 
   // Convert angle (0°=top, clockwise) to SVG x,y
   function polarPoint(angleDeg: number, radius: number) {
@@ -129,12 +129,12 @@ function Speedometer({ size = 220, dashboardVisible = false }: { size?: number, 
       >
         <defs>
           <linearGradient id="gauge-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%"   stopColor="#FF3333" />
-            <stop offset="25%"  stopColor="#FF9500" />
-            <stop offset="50%"  stopColor="#FFCC00" />
+            <stop offset="0%" stopColor="#FF3333" />
+            <stop offset="25%" stopColor="#FF9500" />
+            <stop offset="50%" stopColor="#FFCC00" />
             <stop offset="100%" stopColor="#34C759" />
           </linearGradient>
-          
+
           <clipPath id="gauge-clip">
             <rect x="0" y="0" width={size} height={size * 0.82} />
           </clipPath>
@@ -160,7 +160,7 @@ function Speedometer({ size = 220, dashboardVisible = false }: { size?: number, 
 
         {/* ── Tick marks (outside the arc, only 7) ── */}
         {[...Array(7)].map((_, i) => {
-          const pct  = i / 6;
+          const pct = i / 6;
           const angle = arcFrom + pct * arcSpan;
           const outerR = r + strokeW / 2 + size * 0.035;
           const tickLen = size * 0.015;
@@ -180,15 +180,15 @@ function Speedometer({ size = 220, dashboardVisible = false }: { size?: number, 
 
         {/* ── Needle ── */}
         <motion.g
-          style={{ 
+          style={{
             rotate: needleRotation,
             originX: "50%",
-            originY: "50%" 
+            originY: "50%"
           }}
         >
           {/* Hidden circle to normalize bounding box to exactly center on cx, cy */}
           <circle cx={cx} cy={cy} r={r} fill="transparent" pointerEvents="none" />
-          
+
           {/* Robust tapered needle body extending from circle */}
           <path
             d={`
@@ -202,13 +202,13 @@ function Speedometer({ size = 220, dashboardVisible = false }: { size?: number, 
             style={{ filter: "drop-shadow(0px 4px 8px rgba(0,0,0,0.4))" }}
           />
           {/* Base hollow circle (thicker to match) */}
-          <circle 
-            cx={cx} cy={cy} 
-            r={size * 0.034} 
-            fill="#080B1A" 
-            stroke="#ffffff" 
-            strokeWidth={size * 0.01} 
-            style={{ filter: "drop-shadow(0px 4px 8px rgba(0,0,0,0.4))" }} 
+          <circle
+            cx={cx} cy={cy}
+            r={size * 0.034}
+            fill="#080B1A"
+            stroke="#ffffff"
+            strokeWidth={size * 0.01}
+            style={{ filter: "drop-shadow(0px 4px 8px rgba(0,0,0,0.4))" }}
           />
         </motion.g>
 
@@ -273,23 +273,23 @@ function SpotlightCard({ children, className = "" }: { children: React.ReactNode
   };
 
   return (
-    <div 
+    <div
       ref={containerRef}
-      onMouseMove={handleMouseMove} 
-      onMouseEnter={() => setOpacity(1)} 
-      onMouseLeave={() => setOpacity(0)} 
+      onMouseMove={handleMouseMove}
+      onMouseEnter={() => setOpacity(1)}
+      onMouseLeave={() => setOpacity(0)}
       className={`relative overflow-hidden ${className}`}
     >
-      <div 
-        style={{ 
-          position: "absolute", 
-          inset: 0, 
-          background: `radial-gradient(600px circle at ${pos.x}px ${pos.y}px, rgba(42, 196, 109, 0.12), transparent 40%)`, 
-          opacity, 
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          background: `radial-gradient(600px circle at ${pos.x}px ${pos.y}px, rgba(42, 196, 109, 0.12), transparent 40%)`,
+          opacity,
           transition: "opacity 0.3s",
           pointerEvents: "none",
           zIndex: 1
-        }} 
+        }}
       />
       {children}
     </div>
@@ -345,75 +345,75 @@ interface BentoCardProps {
 function BentoCard({ icon, title, desc, className = "", num, total, badge }: BentoCardProps) {
   const windowWidth = useWindowWidth();
   const stepIdx = parseInt(num, 10);
-  
+
   return (
     <SpotlightCard className={`rounded-[2rem] h-full ${className}`}>
-    <motion.div 
-      whileHover={{ y: -4, scale: 1.01 }}
-      className={`card-glass flex flex-col justify-between h-full`} 
-      style={{ 
-        minHeight: "340px", 
-        padding: "2rem",
-        borderRadius: "2rem",
-        transition: "all 0.3s ease", 
-        cursor: "default",
-        background: "var(--bg-card)",
-        border: "1px solid var(--border-card)",
-        position: "relative",
-        overflow: "hidden"
-      }}
-    >
-      <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
-        <div className="flex justify-between items-start w-full">
-          {/* Top Left Icon Square */}
-          <div style={{ 
-            width: "3.5rem", 
-            height: "3.5rem", 
-            borderRadius: "1rem", 
-            background: "rgba(42, 196, 109, 0.05)", 
-            display: "flex", 
-            alignItems: "center", 
-            justifyContent: "center", 
-            color: "var(--brand-green)",
-            border: "1px solid rgba(42, 196, 109, 0.15)"
-          }}>
-            {icon}
-          </div>
-          
-          {/* Top Right Step Index */}
-          <span style={{ fontFamily: "Inter", fontSize: "0.6rem", fontWeight: 700, color: "var(--text-muted)", opacity: 0.8, letterSpacing: "0.15em", marginTop: "0.5rem" }}>
-            STEP_{num}
-          </span>
-        </div>
+      <motion.div
+        whileHover={{ y: -4, scale: 1.01 }}
+        className={`card-glass flex flex-col justify-between h-full`}
+        style={{
+          minHeight: "340px",
+          padding: "2rem",
+          borderRadius: "2rem",
+          transition: "all 0.3s ease",
+          cursor: "default",
+          background: "var(--bg-card)",
+          border: "1px solid var(--border-card)",
+          position: "relative",
+          overflow: "hidden"
+        }}
+      >
+        <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
+          <div className="flex justify-between items-start w-full">
+            {/* Top Left Icon Square */}
+            <div style={{
+              width: "3.5rem",
+              height: "3.5rem",
+              borderRadius: "1rem",
+              background: "rgba(42, 196, 109, 0.05)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              color: "var(--brand-green)",
+              border: "1px solid rgba(42, 196, 109, 0.15)"
+            }}>
+              {icon}
+            </div>
 
-        <div>
-          {/* Micro Badge */}
-          <div style={{ display: "inline-block", background: "rgba(42, 196, 109, 0.1)", border: "1px solid rgba(42, 196, 109, 0.2)", padding: "0.2rem 0.6rem", borderRadius: "0.25rem", marginBottom: "1rem" }}>
-            <span style={{ fontFamily: "Inter", fontSize: "0.55rem", fontWeight: 800, color: "var(--brand-green)", letterSpacing: "0.1em", textTransform: "uppercase" }}>{badge}</span>
+            {/* Top Right Step Index */}
+            <span style={{ fontFamily: "Inter", fontSize: "0.6rem", fontWeight: 700, color: "var(--text-muted)", opacity: 0.8, letterSpacing: "0.15em", marginTop: "0.5rem" }}>
+              STEP_{num}
+            </span>
           </div>
 
-          <h3 style={{ fontFamily: "Sora", fontWeight: 700, fontSize: "1.25rem", color: "white", marginBottom: "0.75rem", letterSpacing: "-0.02em" }}>{title}</h3>
-          <p style={{ fontFamily: "Inter", fontSize: "0.875rem", color: "var(--text-secondary)", lineHeight: 1.6 }}>{desc}</p>
-        </div>
-      </div>
+          <div>
+            {/* Micro Badge */}
+            <div style={{ display: "inline-block", background: "rgba(42, 196, 109, 0.1)", border: "1px solid rgba(42, 196, 109, 0.2)", padding: "0.2rem 0.6rem", borderRadius: "0.25rem", marginBottom: "1rem" }}>
+              <span style={{ fontFamily: "Inter", fontSize: "0.55rem", fontWeight: 800, color: "var(--brand-green)", letterSpacing: "0.1em", textTransform: "uppercase" }}>{badge}</span>
+            </div>
 
-      {/* Segmented Progress Bar at the bottom */}
-      <div style={{ display: "flex", gap: "4px", width: "100%", marginTop: "2.5rem" }}>
-        {[...Array(total)].map((_, i) => (
-          <div 
-            key={i} 
-            style={{ 
-              height: "3px", 
-              flex: 1, 
-              borderRadius: "999px",
-              background: i < stepIdx ? "var(--brand-green)" : "rgba(255,255,255,0.05)",
-              boxShadow: i < stepIdx ? "0 0 8px var(--green-glow)" : "none",
-              transition: "all 0.3s ease"
-            }} 
-          />
-        ))}
-      </div>
-    </motion.div>
+            <h3 style={{ fontFamily: "Sora", fontWeight: 700, fontSize: "1.25rem", color: "white", marginBottom: "0.75rem", letterSpacing: "-0.02em" }}>{title}</h3>
+            <p style={{ fontFamily: "Inter", fontSize: "0.875rem", color: "var(--text-secondary)", lineHeight: 1.6 }}>{desc}</p>
+          </div>
+        </div>
+
+        {/* Segmented Progress Bar at the bottom */}
+        <div style={{ display: "flex", gap: "4px", width: "100%", marginTop: "2.5rem" }}>
+          {[...Array(total)].map((_, i) => (
+            <div
+              key={i}
+              style={{
+                height: "3px",
+                flex: 1,
+                borderRadius: "999px",
+                background: i < stepIdx ? "var(--brand-green)" : "rgba(255,255,255,0.05)",
+                boxShadow: i < stepIdx ? "0 0 8px var(--green-glow)" : "none",
+                transition: "all 0.3s ease"
+              }}
+            />
+          ))}
+        </div>
+      </motion.div>
     </SpotlightCard>
   );
 }
@@ -423,25 +423,25 @@ interface TestimonialProps { text: string; name: string; role: string; stars?: n
 function TestimonialCard({ text, name, role, stars = 5 }: TestimonialProps) {
   return (
     <SpotlightCard className="rounded-[0.5rem] h-full">
-    <div style={{ background: "var(--bg-card)", border: "1px solid var(--border-card)", borderRadius: "0.5rem", padding: "1.75rem", display: "flex", flexDirection: "column", gap: "1.25rem", transition: "all 0.3s ease", height: "100%" }}
-      onMouseEnter={e => { (e.currentTarget as HTMLDivElement).style.borderColor = "var(--green)"; (e.currentTarget as HTMLDivElement).style.transform = "translateY(-2px)"; }}
-      onMouseLeave={e => { (e.currentTarget as HTMLDivElement).style.borderColor = "var(--border-card)"; (e.currentTarget as HTMLDivElement).style.transform = "translateY(0)"; }}>
-      <div style={{ display: "flex", gap: "2px" }}>
-        {[...Array(stars)].map((_, i) => (
-          <svg key={i} width="16" height="16" viewBox="0 0 16 16" fill="var(--green)"><path d="M8 1l1.9 3.8L14 5.7l-3 2.9.7 4.1L8 10.8l-3.7 1.9.7-4.1-3-2.9 4.1-.9L8 1z" /></svg>
-        ))}
-      </div>
-      <p style={{ fontFamily: "Inter", fontSize: "0.9375rem", color: "var(--text-secondary)", lineHeight: 1.75, fontStyle: "italic", flex: 1 }}>"{text}"</p>
-      <div style={{ borderTop: "1px solid var(--border-card)", paddingTop: "1rem", display: "flex", alignItems: "center", gap: "0.75rem" }}>
-        <div style={{ width: "2.25rem", height: "2.25rem", borderRadius: "999px", background: "rgba(255,255,255,0.05)", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "Inter", fontWeight: 700, fontSize: "0.9rem", color: "white", flexShrink: 0 }}>
-          {name[0]}
+      <div style={{ background: "var(--bg-card)", border: "1px solid var(--border-card)", borderRadius: "0.5rem", padding: "1.75rem", display: "flex", flexDirection: "column", gap: "1.25rem", transition: "all 0.3s ease", height: "100%" }}
+        onMouseEnter={e => { (e.currentTarget as HTMLDivElement).style.borderColor = "var(--green)"; (e.currentTarget as HTMLDivElement).style.transform = "translateY(-2px)"; }}
+        onMouseLeave={e => { (e.currentTarget as HTMLDivElement).style.borderColor = "var(--border-card)"; (e.currentTarget as HTMLDivElement).style.transform = "translateY(0)"; }}>
+        <div style={{ display: "flex", gap: "2px" }}>
+          {[...Array(stars)].map((_, i) => (
+            <svg key={i} width="16" height="16" viewBox="0 0 16 16" fill="var(--green)"><path d="M8 1l1.9 3.8L14 5.7l-3 2.9.7 4.1L8 10.8l-3.7 1.9.7-4.1-3-2.9 4.1-.9L8 1z" /></svg>
+          ))}
         </div>
-        <div>
-          <p style={{ fontFamily: "Sora", fontWeight: 600, fontSize: "0.875rem", color: "white" }}>{name}</p>
-          <p style={{ fontFamily: "Inter", fontSize: "0.75rem", color: "var(--text-muted)", letterSpacing: "0.05em", textTransform: "uppercase" }}>{role}</p>
+        <p style={{ fontFamily: "Inter", fontSize: "0.9375rem", color: "var(--text-secondary)", lineHeight: 1.75, fontStyle: "italic", flex: 1 }}>"{text}"</p>
+        <div style={{ borderTop: "1px solid var(--border-card)", paddingTop: "1rem", display: "flex", alignItems: "center", gap: "0.75rem" }}>
+          <div style={{ width: "2.25rem", height: "2.25rem", borderRadius: "999px", background: "rgba(255,255,255,0.05)", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "Inter", fontWeight: 700, fontSize: "0.9rem", color: "white", flexShrink: 0 }}>
+            {name[0]}
+          </div>
+          <div>
+            <p style={{ fontFamily: "Sora", fontWeight: 600, fontSize: "0.875rem", color: "white" }}>{name}</p>
+            <p style={{ fontFamily: "Inter", fontSize: "0.75rem", color: "var(--text-muted)", letterSpacing: "0.05em", textTransform: "uppercase" }}>{role}</p>
+          </div>
         </div>
       </div>
-    </div>
     </SpotlightCard>
   );
 }
@@ -452,7 +452,7 @@ function CustomCursor() {
   const [isPrimaryHovered, setIsPrimaryHovered] = useState(false);
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
-  
+
   // Spring settings for the halo (smooth delay)
   const springConfig = { damping: 25, stiffness: 200 };
   const haloX = useSpring(cursorX, springConfig);
@@ -462,11 +462,11 @@ function CustomCursor() {
     const moveCursor = (e: MouseEvent) => {
       cursorX.set(e.clientX);
       cursorY.set(e.clientY);
-      
+
       const target = e.target as HTMLElement;
       const isInteractive = !!target.closest('button, a, .clickable');
       const isGreenBtn = !!target.closest('.btn-primary, .btn-green');
-      
+
       setIsHovered(isInteractive);
       setIsPrimaryHovered(isGreenBtn);
     };
@@ -537,14 +537,14 @@ function Reveal({ children, delay = 0, className = "" }: { children: React.React
   const isMobile = windowWidth < 768;
 
   return (
-    <div 
-      ref={ref} 
-      className={className} 
-      style={{ 
-        opacity: inView ? 1 : 0, 
-        transform: inView ? "translateY(0)" : `translateY(${isMobile ? 12 : 28}px)`, 
-        transition: isMobile 
-          ? `opacity 0.4s ease ${delay * 0.5}s, transform 0.4s ease ${delay * 0.5}s` 
+    <div
+      ref={ref}
+      className={className}
+      style={{
+        opacity: inView ? 1 : 0,
+        transform: inView ? "translateY(0)" : `translateY(${isMobile ? 12 : 28}px)`,
+        transition: isMobile
+          ? `opacity 0.4s ease ${delay * 0.5}s, transform 0.4s ease ${delay * 0.5}s`
           : `opacity 0.7s ease ${delay}s, transform 0.7s ease ${delay}s`,
         willChange: "opacity, transform"
       }}
@@ -593,7 +593,7 @@ export default function LandingPage() {
   useEffect(() => {
     // Performance optimization: Only enable Lenis on desktop
     const isMobile = window.innerWidth < 768;
-    
+
     if (isMobile) return;
 
     const lenis = new Lenis({
@@ -649,18 +649,18 @@ export default function LandingPage() {
   return (
     <div id="page-top" style={{ minHeight: "100vh", background: "transparent", color: "var(--text-primary)", overflowX: "hidden", position: "relative" }} className="selection:bg-green/20 selection:text-green">
       <CustomCursor />
-      
+
       {/* Floating Animated Blobs */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none" style={{ zIndex: 0 }}>
-        <motion.div 
+        <motion.div
           animate={{ x: [0, 50, 0], y: [0, 80, 0] }}
           transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-          style={{ position: "absolute", top: "10%", left: "10%", width: "40vw", height: "40vw", background: "radial-gradient(circle, rgba(34, 97, 212, 0.08) 0%, transparent 70%)", filter: "blur(60px)" }} 
+          style={{ position: "absolute", top: "10%", left: "10%", width: "40vw", height: "40vw", background: "radial-gradient(circle, rgba(34, 97, 212, 0.08) 0%, transparent 70%)", filter: "blur(60px)" }}
         />
-        <motion.div 
+        <motion.div
           animate={{ x: [0, -60, 0], y: [0, -40, 0] }}
           transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
-          style={{ position: "absolute", bottom: "10%", right: "10%", width: "45vw", height: "45vw", background: "radial-gradient(circle, rgba(42, 196, 109, 0.05) 0%, transparent 70%)", filter: "blur(60px)" }} 
+          style={{ position: "absolute", bottom: "10%", right: "10%", width: "45vw", height: "45vw", background: "radial-gradient(circle, rgba(42, 196, 109, 0.05) 0%, transparent 70%)", filter: "blur(60px)" }}
         />
       </div>
 
@@ -668,17 +668,17 @@ export default function LandingPage() {
       <div className="bg-mesh" />
       <div className="bg-grid" />
       <div className="bg-dots" style={{ maskImage: "radial-gradient(circle at center, black 10%, transparent 90%)" }} />
-      
+
       {/* Top light glow for the header area */}
       <div style={{ position: "absolute", top: 0, left: "50%", transform: "translateX(-50%)", width: "100%", height: "400px", background: "radial-gradient(ellipse at top, rgba(34, 97, 212, 0.1), transparent 70%)", pointerEvents: "none", zIndex: 0 }} />
 
       {/* ── Floating WhatsApp ── */}
-      <motion.a 
+      <motion.a
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
-        href={WA} 
-        target="_blank" 
-        rel="noopener noreferrer" 
+        href={WA}
+        target="_blank"
+        rel="noopener noreferrer"
         className="fixed bottom-8 right-8 z-[999] w-14 h-14 rounded-full bg-[#22C55E] flex items-center justify-center shadow-[0_0_30px_rgba(34,197,94,0.4)] animate-pulse-green"
       >
         <MessageCircle size={28} color="white" fill="white" />
@@ -700,7 +700,7 @@ export default function LandingPage() {
           </nav>
 
           <div style={{ display: "flex", alignItems: "center", gap: "1.25rem" }}>
-            <a href={WA} target="_blank" rel="noopener noreferrer" className="btn-secondary inline-flex items-center gap-[0.75rem]" style={{ fontSize: "0.8125rem", padding: "0.5rem 1.05rem", height: "auto" }}>
+            <a href={WA} target="_blank" rel="noopener noreferrer" className="btn-secondary inline-flex items-center gap-[0.75rem] hidden lg:inline-flex" style={{ fontSize: "0.8125rem", padding: "0.5rem 1.05rem", height: "auto" }}>
               Fale Conosco
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>
             </a>
@@ -717,6 +717,10 @@ export default function LandingPage() {
             {navLinks.map(l => (
               <a key={l.href} href={l.href} onClick={(e) => { setMenuOpen(false); scrollToSection(e, l.href); }} style={{ display: "block", fontFamily: "Inter", fontSize: "1rem", color: "var(--text-secondary)", padding: "0.75rem 0", borderBottom: "1px solid var(--border-subtle)", textDecoration: "none" }}>{l.label}</a>
             ))}
+            <a href={WA} target="_blank" rel="noopener noreferrer" onClick={() => setMenuOpen(false)} className="btn-secondary w-full justify-center mt-4" style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+              Fale Conosco
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>
+            </a>
           </div>
         )}
       </header>
@@ -725,62 +729,60 @@ export default function LandingPage() {
           SECTION 1 — HERO
       ────────────────────────────────────────── */}
       <section style={{ minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-start", paddingTop: "12rem", position: "relative", overflow: "hidden" }}>
-        
+
         {/* ── Text Content ── */}
         <div style={{ maxWidth: "900px", margin: "0 auto", width: "100%", padding: "0 1.5rem", display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", zIndex: 10 }}>
-          
-          <motion.div 
+
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            style={{ marginBottom: "2rem" }}
+            style={{ marginBottom: "2rem", width: "100%" }}
           >
-            <div style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem", padding: "0.25rem 0.75rem", background: "rgba(42, 196, 109, 0.08)", border: "1px solid rgba(42, 196, 109, 0.2)", borderRadius: "999px" }}>
-              <span className="relative flex h-2 w-2">
+            <div style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem", padding: "0.25rem 0.6rem", background: "rgba(42, 196, 109, 0.08)", border: "1px solid rgba(42, 196, 109, 0.2)", borderRadius: "999px" }}>
+              <span className="relative flex h-2 w-2 flex-shrink-0">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75" style={{ background: "var(--brand-green)" }}></span>
                 <span className="relative inline-flex rounded-full h-2 w-2" style={{ background: "var(--brand-green)" }}></span>
               </span>
-              <motion.span 
+              <motion.span
                 animate={{ opacity: [0.7, 1, 0.7], scale: [0.98, 1, 0.98] }}
                 transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                style={{ fontFamily: "Inter", fontSize: "0.65rem", fontWeight: 700, color: "var(--brand-green)", letterSpacing: "0.15em", textTransform: "uppercase" }}
+                style={{ fontFamily: "Inter", fontSize: "clamp(0.55rem, 1.5vw, 0.65rem)", fontWeight: 700, color: "var(--brand-green)", letterSpacing: "0.1em", textTransform: "uppercase", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", maxWidth: windowWidth < 640 ? "calc(100vw - 4rem)" : "100%" }}
               >
                 ASSESSORIA JURÍDICA E FINANCEIRA ESPECIALIZADA
               </motion.span>
             </div>
           </motion.div>
 
-          <motion.h1 
+          <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            style={{ 
-              fontFamily: "Sora", 
-              fontWeight: 800, 
-              fontSize: "clamp(2.5rem, 5.5vw, 4rem)", 
-              lineHeight: 1.05, 
-              letterSpacing: "-0.04em", 
-              marginBottom: "2rem", 
-              maxWidth: "1150px", 
-              textWrap: "balance" 
+            style={{
+              fontFamily: "Sora",
+              fontWeight: 800,
+              fontSize: "clamp(2rem, 6vw, 4rem)",
+              lineHeight: 1.1,
+              letterSpacing: "-0.04em",
+              marginBottom: "2rem",
+              maxWidth: "1150px",
+              textWrap: "balance"
             }}
             className="text-white mx-auto"
           >
-            Limpe seu Nome e Prepare seu Perfil para <br className="hidden md:block" />
-            <span className="grad-text">Voltar a Ter Crédito</span> <br className="hidden md:block" />
-            no Mercado.
+            Limpe seu Nome e Prepare seu Perfil para <span className="grad-text">Voltar a Ter Crédito</span> no Mercado.
           </motion.h1>
 
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            style={{ 
-              fontFamily: "Inter", 
-              fontSize: "clamp(1rem, 2vw, 1.125rem)", 
-              color: "rgba(255, 255, 255, 0.6)", 
-              lineHeight: 1.7, 
-              maxWidth: "780px", 
+            style={{
+              fontFamily: "Inter",
+              fontSize: "clamp(1rem, 2vw, 1.125rem)",
+              color: "rgba(255, 255, 255, 0.6)",
+              lineHeight: 1.7,
+              maxWidth: "780px",
               marginBottom: "3rem",
               fontWeight: 400
             }}
@@ -789,39 +791,41 @@ export default function LandingPage() {
             <span style={{ color: "white", fontWeight: 600 }}>Diga adeus às falsas promessas.</span> A SCOREPONTOCOM utiliza Ações Coletivas e negociações estratégicas para remover restrições e recuperar seu poder de compra.
           </motion.p>
 
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            style={{ display: "flex", gap: "1rem", flexWrap: "wrap", justifyContent: "center" }}
+            style={{ display: "flex", gap: "1rem", flexWrap: "wrap", justifyContent: "center", width: "100%", maxWidth: "600px" }}
           >
-            <a href={WA} target="_blank" rel="noopener noreferrer" className="btn-primary flex items-center gap-[0.75rem] h-16 px-10 text-lg">
-              Falar com um Especialista Agora
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <a href={WA} target="_blank" rel="noopener noreferrer" className="btn-primary flex items-center justify-center gap-2 h-14 px-6 text-base md:h-16 md:px-10 md:text-lg whitespace-nowrap flex-1 md:flex-initial">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="flex-shrink-0"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" /></svg>
+              <span className="hidden sm:inline">Falar com Especialista</span>
+              <span className="sm:hidden">Falar Agora</span>
             </a>
-            <a href="#solucoes" onClick={(e) => scrollToSection(e, "#solucoes")} className="btn-secondary h-16 px-10 flex items-center justify-center text-sm tracking-widest uppercase font-semibold text-white rounded-full transition-all">
-              Explorar Plataforma
+            <a href="#solucoes" onClick={(e) => scrollToSection(e, "#solucoes")} className="btn-secondary h-14 px-6 md:h-16 md:px-10 flex items-center justify-center text-xs md:text-sm tracking-widest uppercase font-semibold text-white rounded-full transition-all flex-1 md:flex-initial whitespace-nowrap">
+              <span className="hidden sm:inline">Explorar Plataforma</span>
+              <span className="sm:hidden">Explorar</span>
             </a>
           </motion.div>
         </div>
 
         {/* ── Dashboard Full Container ── */}
-        <motion.div 
+        <motion.div
           ref={dashboardRef}
           initial={{ opacity: 0, y: 40 }}
           animate={dashboardVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
           transition={{ duration: 0.8, delay: 0, type: "spring", stiffness: 60, damping: 20 }}
           whileHover={{ boxShadow: "0 50px 100px -20px rgba(0,0,0,0.9), 0 0 40px -10px rgba(42, 196, 109, 0.15)" }}
-          style={{ 
+          style={{
             width: windowWidth < 1100 ? "calc(100% - 32px)" : "100%",
-            maxWidth: "1050px", 
-            margin: "5rem auto 0", 
-            position: "relative", 
-            zIndex: 10, 
-            background: "rgba(8, 11, 26, 0.8)", 
+            maxWidth: "1050px",
+            margin: "5rem auto 0",
+            position: "relative",
+            zIndex: 10,
+            background: "rgba(8, 11, 26, 0.8)",
             backdropFilter: "blur(20px)",
-            borderRadius: "24px", 
-            border: "1px solid rgba(255,255,255,0.08)", 
+            borderRadius: "24px",
+            border: "1px solid rgba(255,255,255,0.08)",
             boxShadow: "0 40px 100px -20px rgba(0,0,0,0.7), 0 0 20px rgba(42, 196, 109, 0.05)"
           }}
         >
@@ -836,18 +840,18 @@ export default function LandingPage() {
           </div>
 
           {/* Main Grid Content */}
-          <div style={{ 
-            padding: windowWidth < 768 ? "24px" : "48px 40px 56px", 
-            display: "grid", 
-            gridTemplateColumns: windowWidth < 1024 ? "1fr" : "1fr auto 1fr", 
-            gap: "40px", 
-            alignItems: "center" 
+          <div style={{
+            padding: windowWidth < 768 ? "24px" : "48px 40px 56px",
+            display: "grid",
+            gridTemplateColumns: windowWidth < 1024 ? "1fr" : "1fr auto 1fr",
+            gap: "40px",
+            alignItems: "center"
           }}>
-            
+
             {/* Lado Esquerdo - Show 1 card on Mobile, all on Desktop */}
             {(windowWidth >= 768 || true) && (
               <div style={{ display: windowWidth < 768 ? "none" : "flex", flexDirection: "column", gap: "16px", width: "100%" }}>
-                <motion.div 
+                <motion.div
                   initial={{ opacity: 0, x: -30 }}
                   animate={dashboardVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
                   transition={{ duration: 0.7, delay: 0.6, type: "spring" }}
@@ -859,7 +863,7 @@ export default function LandingPage() {
                   <div style={{ fontFamily: "Sora", fontSize: "1.25rem", color: "#fff", fontWeight: 700 }}>+240 pts</div>
                 </motion.div>
                 {windowWidth >= 768 && (
-                  <motion.div 
+                  <motion.div
                     initial={{ opacity: 0, x: -30 }}
                     animate={dashboardVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
                     transition={{ duration: 0.7, delay: 0.7, type: "spring" }}
@@ -876,93 +880,93 @@ export default function LandingPage() {
 
             {/* Floating Mobile Card 1 */}
             {windowWidth < 768 && (
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0, scale: 0.8, x: -20 }}
-                animate={dashboardVisible ? { 
-                  opacity: 1, 
-                  scale: 1, 
+                animate={dashboardVisible ? {
+                  opacity: 1,
+                  scale: 1,
                   x: 0,
                   y: [0, -8, 0] // Floating effect
                 } : { opacity: 0, scale: 0.8, x: -20 }}
-                transition={dashboardVisible ? { 
+                transition={dashboardVisible ? {
                   opacity: { duration: 0.5 },
                   y: { duration: 3, repeat: Infinity, ease: "easeInOut" }
                 } : {}}
-                style={{ 
+                style={{
                   position: "absolute", top: "45%", left: "5%", width: "120px",
                   background: "rgba(42, 196, 109, 0.1)", border: "1px solid rgba(42, 196, 109, 0.2)",
                   borderRadius: "12px", padding: "12px", zIndex: 20, backdropFilter: "blur(8px)"
                 }}
               >
-                 <HistoryIcon size={14} color="#2AC46D" style={{ marginBottom: "4px" }} />
-                 <div style={{ fontSize: "10px", color: "#fff", fontWeight: 600 }}>+240 pts</div>
+                <HistoryIcon size={14} color="#2AC46D" style={{ marginBottom: "4px" }} />
+                <div style={{ fontSize: "10px", color: "#fff", fontWeight: 600 }}>+240 pts</div>
               </motion.div>
             )}
 
             {/* Floating Mobile Card 2 */}
             {windowWidth < 768 && (
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0, scale: 0.8, x: 20 }}
-                animate={dashboardVisible ? { 
-                  opacity: 1, 
-                  scale: 1, 
+                animate={dashboardVisible ? {
+                  opacity: 1,
+                  scale: 1,
                   x: 0,
                   y: [0, 8, 0] // Floating effect (offset)
                 } : { opacity: 0, scale: 0.8, x: 20 }}
-                transition={dashboardVisible ? { 
+                transition={dashboardVisible ? {
                   opacity: { duration: 0.5 },
                   y: { duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }
                 } : {}}
-                style={{ 
+                style={{
                   position: "absolute", top: "55%", right: "5%", width: "120px",
                   background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)",
                   borderRadius: "12px", padding: "12px", zIndex: 20, backdropFilter: "blur(8px)"
                 }}
               >
-                 <CheckCircle2 size={14} color="#2AC46D" style={{ marginBottom: "4px" }} />
-                 <div style={{ fontSize: "10px", color: "#fff", fontWeight: 600 }}>Aprovação 98%</div>
+                <CheckCircle2 size={14} color="#2AC46D" style={{ marginBottom: "4px" }} />
+                <div style={{ fontSize: "10px", color: "#fff", fontWeight: 600 }}>Aprovação 98%</div>
               </motion.div>
             )}
 
             {/* Centro - Gauge */}
-            <motion.div 
+            <motion.div
               initial={{ scale: 0.9, opacity: 0 }}
               animate={dashboardVisible ? { scale: 1, opacity: 1 } : { scale: 0.9, opacity: 0 }}
               transition={{ duration: 0.8, delay: 0.5, type: "spring", bounce: 0.3 }}
-              style={{ 
-                display: "flex", 
-                flexDirection: "column", 
-                alignItems: "center", 
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
                 justifyContent: "center",
                 marginTop: "-24px" // Harmoniza o peso visual do arco
               }}
             >
               <Speedometer size={windowWidth < 640 ? 260 : 360} dashboardVisible={dashboardVisible} />
-              
-              <motion.div 
+
+              <motion.div
                 whileHover={{ scale: 1.05, backgroundColor: "rgba(10, 40, 20, 0.8)" }}
-                style={{ 
-                  background: "rgba(10, 30, 20, 0.6)", 
-                  border: "1px solid rgba(25, 80, 45, 0.4)", 
-                  borderRadius: "2rem", 
-                  padding: "10px 24px", 
-                  marginTop: "8px", 
-                  display: "flex", 
-                  alignItems: "center", 
+                style={{
+                  background: "rgba(10, 30, 20, 0.6)",
+                  border: "1px solid rgba(25, 80, 45, 0.4)",
+                  borderRadius: "2rem",
+                  padding: "10px 24px",
+                  marginTop: "8px",
+                  display: "flex",
+                  alignItems: "center",
                   gap: "10px",
                   cursor: "pointer",
                   boxShadow: "0 4px 12px rgba(0,0,0,0.2)"
                 }}
               >
                 <div style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#2AC46D", boxShadow: "0 0 8px #2AC46D" }} className="animate-pulse" />
-                <motion.span 
+                <motion.span
                   animate={{ opacity: [0.8, 1, 0.8] }}
                   transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                  style={{ 
-                    fontFamily: "Inter", 
-                    fontWeight: 700, 
-                    fontSize: "0.7rem", 
-                    color: "rgba(255,255,255,0.9)", 
+                  style={{
+                    fontFamily: "Inter",
+                    fontWeight: 700,
+                    fontSize: "0.7rem",
+                    color: "rgba(255,255,255,0.9)",
                     textTransform: "uppercase",
                     letterSpacing: "0.05em"
                   }}
@@ -976,7 +980,7 @@ export default function LandingPage() {
             {windowWidth >= 768 && (
               <div style={{ display: "flex", flexDirection: "column", gap: "16px", width: "100%" }}>
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
-                  <motion.div 
+                  <motion.div
                     initial={{ opacity: 0, x: 30 }}
                     animate={dashboardVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
                     transition={{ duration: 0.7, delay: 0.8, type: "spring" }}
@@ -986,7 +990,7 @@ export default function LandingPage() {
                     <div style={{ fontFamily: "Inter", fontSize: "0.65rem", color: "rgba(255,255,255,0.4)", textTransform: "uppercase", fontWeight: 700, letterSpacing: "1px", marginBottom: "8px" }}>Aprovação</div>
                     <div style={{ fontFamily: "Sora", fontSize: "1.25rem", color: "#fff", fontWeight: 700 }}>98%</div>
                   </motion.div>
-                  <motion.div 
+                  <motion.div
                     initial={{ opacity: 0, x: 30 }}
                     animate={dashboardVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
                     transition={{ duration: 0.7, delay: 0.9, type: "spring" }}
@@ -997,7 +1001,7 @@ export default function LandingPage() {
                     <div style={{ fontFamily: "Sora", fontSize: "1.25rem", color: "#fff", fontWeight: 700 }}>A1</div>
                   </motion.div>
                 </div>
-                <motion.div 
+                <motion.div
                   initial={{ opacity: 0, x: 30 }}
                   animate={dashboardVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
                   transition={{ duration: 0.7, delay: 1.0, type: "spring" }}
@@ -1010,25 +1014,25 @@ export default function LandingPage() {
                   </div>
                   <div style={{ display: "flex", alignItems: "flex-end", gap: "6px", height: "50px" }}>
                     {[30, 45, 20, 60, 40, 90, 50].map((h, i) => (
-                      <motion.div 
-                        key={i} 
+                      <motion.div
+                        key={i}
                         initial={{ height: 0 }}
-                        animate={dashboardVisible ? { 
-                          height: [ `${h}%`, `${Math.max(10, h - 15)}%`, `${Math.min(100, h + 15)}%`, `${h}%` ] 
+                        animate={dashboardVisible ? {
+                          height: [`${h}%`, `${Math.max(10, h - 15)}%`, `${Math.min(100, h + 15)}%`, `${h}%`]
                         } : { height: 0 }}
-                        transition={dashboardVisible ? { 
+                        transition={dashboardVisible ? {
                           height: {
-                            duration: 2.5 + (i * 0.2), 
-                            repeat: Infinity, 
+                            duration: 2.5 + (i * 0.2),
+                            repeat: Infinity,
                             ease: "easeInOut",
                             delay: 1.1 + (i * 0.1)
                           }
                         } : { duration: 0.8 }}
-                        style={{ 
-                          flex: 1, 
+                        style={{
+                          flex: 1,
                           background: i === 5 ? "#2AC46D" : "rgba(255,255,255,0.1)",
                           borderRadius: "4px"
-                        }} 
+                        }}
                       />
                     ))}
                   </div>
@@ -1044,16 +1048,16 @@ export default function LandingPage() {
         <Reveal delay={1} className="w-full mt-28">
           <div style={{ position: "relative", padding: "2.5rem 0", borderTop: "1px solid rgba(255,255,255,0.05)", borderBottom: "1px solid rgba(255,255,255,0.05)", background: "rgba(255,255,255,0.01)" }}>
             <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 1.5rem", display: "flex", flexDirection: "column", alignItems: "center", gap: "2.5rem" }}>
-              <p style={{ 
-                fontFamily: "Inter", 
-                fontSize: windowWidth < 768 ? "0.6rem" : "0.7rem", 
-                fontWeight: 700, 
-                color: "var(--brand-green)", 
-                textTransform: "uppercase", 
-                letterSpacing: windowWidth < 768 ? "0.1em" : "0.25em", 
-                opacity: 0.8, 
-                display: "flex", 
-                alignItems: "center", 
+              <p style={{
+                fontFamily: "Inter",
+                fontSize: windowWidth < 768 ? "0.6rem" : "0.7rem",
+                fontWeight: 700,
+                color: "var(--brand-green)",
+                textTransform: "uppercase",
+                letterSpacing: windowWidth < 768 ? "0.1em" : "0.25em",
+                opacity: 0.8,
+                display: "flex",
+                alignItems: "center",
                 justifyContent: "center",
                 gap: windowWidth < 768 ? "0.5rem" : "1rem",
                 width: "100%",
@@ -1063,14 +1067,14 @@ export default function LandingPage() {
                 Especialistas em Protocolos de Auditoria
                 <span style={{ width: windowWidth < 768 ? "1rem" : "2rem", height: "1px", background: "var(--brand-green)", opacity: 0.3 }} />
               </p>
-              <div style={{ 
-                display: "flex", 
-                flexWrap: "wrap", 
-                justifyContent: "center", 
-                alignItems: "center", 
-                gap: windowWidth < 768 ? "2.5rem" : "5rem", 
-                opacity: 0.5, 
-                filter: "brightness(2)" 
+              <div style={{
+                display: "flex",
+                flexWrap: "wrap",
+                justifyContent: "center",
+                alignItems: "center",
+                gap: windowWidth < 768 ? "2.5rem" : "5rem",
+                opacity: 0.5,
+                filter: "brightness(2)"
               }}>
                 {partners.map(p => (
                   <span key={p} style={{ fontFamily: "Sora", fontWeight: 800, fontSize: "clamp(0.875rem, 2vw, 1.15rem)", letterSpacing: "-0.02em", color: "white" }}>{p}</span>
@@ -1087,21 +1091,21 @@ export default function LandingPage() {
       ────────────────────────────────────────── */}
       <section ref={statsRef} style={{ padding: windowWidth < 768 ? "4rem 1.5rem" : "6rem 1.5rem", position: "relative", zIndex: 10 }}>
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
-          <div style={{ 
-            background: "rgba(255,255,255,0.02)", 
+          <div style={{
+            background: "rgba(255,255,255,0.02)",
             backdropFilter: "blur(10px)",
-            border: "1px solid rgba(255,255,255,0.06)", 
-            borderRadius: "2rem", 
+            border: "1px solid rgba(255,255,255,0.06)",
+            borderRadius: "2rem",
             padding: windowWidth < 768 ? "2.5rem 1.5rem" : "4rem 3rem",
-            display: "grid", 
-            gridTemplateColumns: windowWidth < 1024 ? "repeat(1, 1fr)" : "repeat(4, 1fr)", 
+            display: "grid",
+            gridTemplateColumns: windowWidth < 1024 ? "repeat(1, 1fr)" : "repeat(4, 1fr)",
             gap: windowWidth < 768 ? "2.5rem 1rem" : "3rem",
             position: "relative",
             overflow: "hidden"
           }}>
             {/* Subtle light effect inside the container */}
             <div style={{ position: "absolute", top: 0, left: "20%", right: "20%", height: "1px", background: "linear-gradient(90deg, transparent, rgba(34,197,94,0.3), transparent)" }} />
-            
+
             <StatItem value={98} suffix="%" label="Taxa de aprovações" inView={statsVisible} />
             <StatItem value={5000} suffix="+" label="Clientes atendidos" inView={statsVisible} />
             <StatItem value={72} suffix="h" label="Tempo médio de resultado" inView={statsVisible} />
@@ -1171,12 +1175,12 @@ export default function LandingPage() {
       ────────────────────────────────────────── */}
       <section id="realidade" style={{ padding: "4rem 1.5rem 6rem", position: "relative", background: "linear-gradient(180deg, transparent, rgba(211,56,72,0.04) 50%, transparent)" }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto", display: "grid", gridTemplateColumns: windowWidth < 768 ? "1fr" : "1fr 1fr", gap: windowWidth < 768 ? "3rem" : "5rem", alignItems: "center" }}>
-          
+
           {/* Visual */}
           <Reveal className="order-2 md:order-1">
             <div style={{ position: "relative" }}>
               <div style={{ position: "absolute", inset: "-20px", background: "radial-gradient(circle, rgba(211,56,72,0.08) 0%, transparent 70%)", borderRadius: "999px", pointerEvents: "none" }} />
-              
+
               <div style={{ position: "relative", display: "flex", flexDirection: "column", gap: "0.875rem" }}>
                 {/* Before card */}
                 <div style={{ background: "rgba(211,56,72,0.06)", border: "1px solid rgba(211,56,72,0.2)", borderRadius: "1.125rem", padding: "1.25rem 1.5rem", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
@@ -1267,7 +1271,7 @@ export default function LandingPage() {
                 [ SC-03 ] NOSSAS SOLUÇÕES
               </span>
               <h2 style={{ fontFamily: "Sora", fontWeight: 700, fontSize: "clamp(2rem, 4vw, 3.5rem)", color: "white", marginTop: "1.5rem", letterSpacing: "-0.03em" }}>
-                Estratégias validadas para<br />
+                Estratégias validadas para<br className="hidden md:block" />
                 <span style={{ color: "var(--brand-green)" }}>Pessoas Físicas e CNPJs</span>
               </h2>
               <p style={{ fontFamily: "Inter", color: "var(--text-secondary)", fontSize: "1.0625rem", lineHeight: 1.7, maxWidth: "600px", margin: "1.5rem auto 0" }}>
@@ -1276,14 +1280,14 @@ export default function LandingPage() {
             </div>
           </Reveal>
 
-          <div style={{ 
-            display: "grid", 
-            gap: "1.5rem", 
+          <div style={{
+            display: "grid",
+            gap: "1.5rem",
             gridTemplateColumns: windowWidth < 768 ? "1fr" : "repeat(auto-fit, minmax(280px, 1fr))"
           }}>
             {services.map((service, index) => (
               <Reveal key={index} delay={index * 0.1}>
-                <BentoCard 
+                <BentoCard
                   num={service.num}
                   total={services.length}
                   badge={service.badge}
@@ -1326,7 +1330,7 @@ export default function LandingPage() {
                     <span style={{ fontFamily: "Inter", fontSize: "0.7rem", fontWeight: 800, color: "var(--text-muted)", letterSpacing: "0.15em", textTransform: "uppercase" }}>Diagnóstico Essencial</span>
                     <h3 style={{ fontFamily: "Sora", fontWeight: 700, fontSize: "1.75rem", color: "white", marginTop: "0.5rem" }}>Plano Starter</h3>
                   </div>
-                  
+
                   <div style={{ marginBottom: "2.5rem" }}>
                     <div style={{ display: "flex", alignItems: "baseline", gap: "0.5rem" }}>
                       <span style={{ fontFamily: "Inter", fontSize: "1rem", color: "var(--text-muted)" }}>R$</span>
@@ -1370,7 +1374,7 @@ export default function LandingPage() {
                     <span style={{ fontFamily: "Inter", fontSize: "0.7rem", fontWeight: 800, color: "var(--brand-green)", letterSpacing: "0.15em", textTransform: "uppercase" }}>Análise Profunda e Blindagem</span>
                     <h3 style={{ fontFamily: "Sora", fontWeight: 700, fontSize: "1.75rem", color: "white", marginTop: "0.5rem" }}>Plano Pro</h3>
                   </div>
-                  
+
                   <div style={{ marginBottom: "2.5rem" }}>
                     <div style={{ display: "flex", alignItems: "baseline", gap: "0.5rem" }}>
                       <span style={{ fontFamily: "Inter", fontSize: "1rem", color: "var(--text-muted)" }}>R$</span>
@@ -1449,7 +1453,8 @@ export default function LandingPage() {
                 <span style={{ opacity: 0.5, marginRight: "0.5rem" }}>[ SC-06 ]</span> PERGUNTAS FREQUENTES
               </span>
               <h2 style={{ fontFamily: "Sora", fontWeight: 800, fontSize: "clamp(1.875rem,4vw,3rem)", letterSpacing: "-0.025em", lineHeight: 1.15 }}>
-                Clareza total antes de você <br className="hidden md:block" /> <span className="grad-text">tomar sua decisão.</span>
+                Clareza total antes de você<br className="hidden md:block" />
+                <span className="grad-text">tomar sua decisão.</span>
               </h2>
             </div>
           </Reveal>
@@ -1457,11 +1462,11 @@ export default function LandingPage() {
           <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
             {faqs.map((faq, i) => (
               <Reveal key={i} delay={i * 0.08}>
-                <FaqItem 
-                  q={faq.q} 
-                  a={faq.a} 
-                  isOpen={activeFaq === i} 
-                  toggle={() => setActiveFaq(activeFaq === i ? null : i)} 
+                <FaqItem
+                  q={faq.q}
+                  a={faq.a}
+                  isOpen={activeFaq === i}
+                  toggle={() => setActiveFaq(activeFaq === i ? null : i)}
                 />
               </Reveal>
             ))}
@@ -1478,10 +1483,10 @@ export default function LandingPage() {
 
         <div style={{ maxWidth: "1200px", margin: "0 auto", position: "relative" }}>
           <Reveal>
-            
+
             {/* The Huge SaaS Container */}
             <div style={{ position: "relative", padding: windowWidth < 768 ? "3rem 1.5rem" : "6rem 4rem", background: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E\"), rgba(10, 11, 26, 0.4)", backdropFilter: "blur(20px)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: "2rem", overflow: "hidden" }}>
-              
+
               {/* Corner Accents (Crosshairs) */}
               <div style={{ position: "absolute", top: "1rem", left: "1rem", width: "12px", height: "12px", background: "url('data:image/svg+xml;utf8,<svg width=\"12\" height=\"12\" viewBox=\"0 0 12 12\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M6 0v12M0 6h12\" stroke=\"rgba(255,255,255,0.2)\" stroke-width=\"1\"/></svg>') no-repeat" }} />
               <div style={{ position: "absolute", top: "1rem", right: "1rem", width: "12px", height: "12px", background: "url('data:image/svg+xml;utf8,<svg width=\"12\" height=\"12\" viewBox=\"0 0 12 12\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M6 0v12M0 6h12\" stroke=\"rgba(255,255,255,0.2)\" stroke-width=\"1\"/></svg>') no-repeat" }} />
@@ -1492,7 +1497,7 @@ export default function LandingPage() {
               <div style={{ position: "absolute", top: "0", left: "0", right: "0", height: "1px", background: "linear-gradient(90deg, transparent, rgba(42, 196, 109, 0.5), transparent)" }} />
               <div style={{ position: "absolute", top: "1.5rem", left: "0", right: "0", display: "flex", justifyContent: "center", pointerEvents: "none" }}>
                 <div style={{ width: "100px", height: "4px", background: "rgba(255,255,255,0.05)", borderRadius: "2px", position: "relative" }}>
-                   <div style={{ position: "absolute", top: 0, left: "20%", right: "40%", height: "100%", background: "var(--brand-green)", borderRadius: "2px", boxShadow: "0 0 10px var(--brand-green)" }} />
+                  <div style={{ position: "absolute", top: 0, left: "20%", right: "40%", height: "100%", background: "var(--brand-green)", borderRadius: "2px", boxShadow: "0 0 10px var(--brand-green)" }} />
                 </div>
               </div>
 
@@ -1508,11 +1513,11 @@ export default function LandingPage() {
                   </span>
                   PRONTOS PARA AGIR // V.2026
                 </span>
-                
+
                 <h2 style={{ fontFamily: "Sora", fontWeight: 800, fontSize: "clamp(2.5rem,6vw,5rem)", letterSpacing: "-0.04em", lineHeight: 1.05, marginBottom: "1.5rem", textWrap: "balance" }}>
                   Assuma o controle da sua <span style={{ color: "var(--brand-green)" }}>vida financeira</span> hoje.
                 </h2>
-                
+
                 <p style={{ fontFamily: "Inter", color: "var(--text-secondary)", fontSize: "1.125rem", lineHeight: 1.75, maxWidth: "720px", margin: "0 auto 3.5rem", textWrap: "balance" }}>
                   Continuar no escuro só aumenta os juros e diminui suas chances de aprovação no futuro. Dê o primeiro passo: escolha o seu diagnóstico e deixe nossa equipe jurídica e financeira preparar o seu nome para o mercado.
                 </p>
@@ -1528,8 +1533,8 @@ export default function LandingPage() {
                   </a>
 
                   <p style={{ fontFamily: "Inter", fontSize: "0.8125rem", color: "var(--text-muted)", display: "flex", alignItems: "center", gap: "0.5rem", padding: "0.5rem 1rem", background: "rgba(0,0,0,0.3)", borderRadius: "99px", border: "1px solid rgba(255,255,255,0.05)" }}>
-                    <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="var(--brand-green)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>
-                    Processamento seguro via WhatsApp Oficial 
+                    <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="var(--brand-green)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z" /><circle cx="12" cy="10" r="3" /></svg>
+                    Processamento seguro via WhatsApp Oficial
                   </p>
                 </div>
               </div>
