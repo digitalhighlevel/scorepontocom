@@ -554,6 +554,66 @@ function Reveal({ children, delay = 0, className = "" }: { children: React.React
   );
 }
 
+/* ─── Lumo Studio Modern Credit Bar (Horizontal) ─── */
+function LumoStudioCreditBar() {
+  return (
+    <motion.div
+      initial={{ y: 100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ delay: 1.2, duration: 1, ease: [0.22, 1, 0.36, 1] }}
+      className="fixed bottom-0 left-0 right-0 z-[1000] p-4 md:p-6 pointer-events-none flex justify-center"
+    >
+      <div className="w-full max-w-[1200px] h-16 md:h-20 lumo-glass rounded-2xl md:rounded-3xl border border-white/10 flex items-center justify-between px-4 md:px-8 shadow-[0_20px_50px_rgba(0,0,0,0.5)] pointer-events-auto group">
+        
+        {/* Left: Brand Info */}
+        <a 
+          href="https://lumostudio.com.br" 
+          className="flex items-center gap-3 md:gap-5 group/logo"
+        >
+          <div className="w-10 h-10 md:w-12 md:h-12 bg-[#FF6B35] rounded-xl md:rounded-2xl flex items-center justify-center shadow-[0_8px_20px_rgba(255,107,53,0.2)] group-hover/logo:shadow-[0_8px_30px_rgba(255,107,53,0.4)] group-hover/logo:scale-105 transition-all duration-500">
+            <svg width="20" height="20" md-width="24" md-height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2C12 2 12.5 9.5 13.5 10.5C14.5 11.5 22 12 22 12C22 12 14.5 12.5 13.5 13.5C12.5 14.5 12 22 12 22C12 22 11.5 14.5 10.5 13.5C9.5 12.5 2 12 2 12C2 12 9.5 11.5 10.5 10.5C11.5 9.5 12 2 12 2Z" fill="white" />
+            </svg>
+          </div>
+          
+          <div className="flex flex-col">
+            <span className="text-[8px] md:text-[10px] uppercase tracking-[0.2em] text-white/30 font-bold leading-none mb-1 md:mb-1.5">
+              Projeto Desenvolvido por
+            </span>
+            <span className="text-sm md:text-lg font-heading font-extrabold text-white group-hover/logo:text-[#FF6B35] transition-colors duration-300">
+              Lumo Studio
+            </span>
+          </div>
+        </a>
+
+        {/* Center: Subtle Divider (Desktop only) */}
+        <div className="hidden md:block h-8 w-px bg-white/10 mx-4" />
+
+        {/* Right: Portfolio Button */}
+        <a 
+          href="https://lumostudio.com.br" 
+          className="flex items-center gap-2 md:gap-3 px-4 md:px-6 py-2.5 md:py-3 rounded-xl md:rounded-2xl bg-white/5 border border-white/5 hover:border-white/20 hover:bg-white/10 text-white/70 hover:text-white transition-all duration-300 group/btn shadow-xl"
+        >
+          <span className="text-[10px] md:text-xs font-bold uppercase tracking-widest">
+            {window.innerWidth < 768 ? 'Portfolio' : 'Voltar para Portfolio'}
+          </span>
+          <svg width="14" height="14" md-width="16" md-height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="group-hover/btn:translate-x-1 transition-transform">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+
+        {/* Mobile Info (Left-aligned info for better UX) */}
+        <a 
+          href="https://lumostudio.com.br" 
+          className="lg:hidden absolute inset-0 pointer-events-auto"
+          aria-hidden="true"
+        />
+
+      </div>
+    </motion.div>
+  );
+}
+
 /* ─── Main ─── */
 export default function LandingPage() {
   const windowWidth = useWindowWidth();
@@ -649,6 +709,7 @@ export default function LandingPage() {
   return (
     <div id="page-top" style={{ minHeight: "100vh", background: "transparent", color: "var(--text-primary)", overflowX: "hidden", position: "relative" }} className="selection:bg-green/20 selection:text-green">
       <CustomCursor />
+      <LumoStudioCreditBar />
 
       {/* Floating Animated Blobs */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none" style={{ zIndex: 0 }}>
@@ -679,7 +740,7 @@ export default function LandingPage() {
         href={WA}
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed bottom-8 right-8 z-[999] w-14 h-14 rounded-full bg-[#22C55E] flex items-center justify-center shadow-[0_0_30px_rgba(34,197,94,0.4)] animate-pulse-green"
+        className="fixed bottom-24 lg:bottom-8 right-6 lg:right-8 z-[999] w-14 h-14 rounded-full bg-[#22C55E] flex items-center justify-center shadow-[0_0_30px_rgba(34,197,94,0.4)] animate-pulse-green"
       >
         <MessageCircle size={28} color="white" fill="white" />
       </motion.a>
